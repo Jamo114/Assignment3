@@ -10,6 +10,14 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CryptoMachine.h" />
+    <ClInclude Include="driver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CryptoMachine.cpp" />
+    <ClCompile Include="driver.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6C7A9519-ED15-4C01-A008-7E81C91427AD}</ProjectGuid>
     <RootNamespace>Assignment3</RootNamespace>
@@ -63,14 +71,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\Downloads\cmdline_parser.h" />
-    <ClInclude Include="CryptoMachine.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Downloads\cmdline_parser.cpp" />
-    <ClCompile Include="CryptoMachine.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
