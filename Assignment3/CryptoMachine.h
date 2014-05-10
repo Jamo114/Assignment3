@@ -9,11 +9,14 @@
 class CryptoMachine
 {
 public:
-	CryptoMachine();
+	CryptoMachine(std::string, std::string);
 	~CryptoMachine();
-	std::string Group(std::string);
+	void Encode();
+	void Decode();
+	void Group(std::string&);
 
 	std::string plainText;
+	std::string key;
 };
 
 #endif
