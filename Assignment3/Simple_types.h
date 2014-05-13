@@ -7,7 +7,7 @@
 #include <fstream>
 
 
-class Vignere
+class Vigenere
 {
 public:
 	std::string key;
@@ -33,16 +33,12 @@ class ECB
 class CBC
 {};
 
-class Grouping
+class GroupingYes
 {
 public:
 	void group(std::string &plainText)
 	{
-		std::transform(plainText.begin(), plainText.end(), plainText.begin(), ::toupper);
-
-		plainText.erase(
-			std::remove_if(plainText.begin(), plainText.end(), ::isspace),
-			plainText.end());
+		
 
 		std::string temp;
 		//adds in the spaces every 5 characters
@@ -70,6 +66,9 @@ public:
 		plainText = temp;
 	}	
 };
+
+class GroupingNo
+{};
 
 class Pack
 {};

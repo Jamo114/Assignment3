@@ -13,11 +13,19 @@ class CryptoMachineTraits
 };
 
 template<typename Pack>
-class CryptoMachineTraits<Vignere, ECB, Pack, Grouping>
+class CryptoMachineTraits<Vigenere, ECB, Pack, GroupingYes>
 {
-	typedef Vignere cipher;
+	typedef Vigenere cipher;
 	typedef ECB mode;
-	typedef Grouping group;
+	typedef GroupingYes group;
+};
+
+template<typename Pack>
+class CryptoMachineTraits<Vigenere, ECB, Pack, GroupingNo>
+{
+	typedef Vigenere cipher;
+	typedef ECB mode;
+	typedef GroupingNo group;
 };
 
 #endif
