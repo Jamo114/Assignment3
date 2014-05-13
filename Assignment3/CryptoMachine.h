@@ -5,15 +5,20 @@
 #include <iostream>
 #include <algorithm>
 #include <cctype>
-
+template <typename Cipher, typename Mode, typename Pack, typename Group>
 class CryptoMachine
 {
 public:
-	CryptoMachine(std::string, std::string);
+	typedef Cipher cipher;
+	typedef Mode mode;
+	typedef Pack pack;
+	typedef Group group;
+
+	CryptoMachine(Cipher, Mode, Pack, Group);
 	~CryptoMachine();
-	void Encode();
-	void Decode();
-	void Group(std::string&);
+	void Encode(std::istream &, std::ostream &);
+	void Decode(std::istream &, std::ostream &);
+	void Grouping(std::string&);
 
 	std::string plainText;
 	std::string key;

@@ -15,17 +15,20 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CryptoMachine.h">
+    <ClInclude Include="driver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="driver.h">
+    <ClInclude Include="CryptoMachine_policy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CryptoMachine_traits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Simple_types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CryptoMachine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="driver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
