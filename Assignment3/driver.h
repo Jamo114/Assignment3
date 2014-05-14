@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <ctime>
 
+#define CATCH_CONFIG_MAIN
+
 #include "CryptoMachine_traits.h"
 #include "CryptoMachine_policy.h"
 #include "Simple_types.h"

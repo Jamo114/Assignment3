@@ -7,38 +7,93 @@ inline void mySleep(clock_t sec)
 	while (clock() != end_time);
 }
 
-int main(int argc, char* argv[])
+//int main(int argc, char* argv[])
+//{
+//	CryptoMachinePolicies<XOR, ECB, Pack, GroupingNo> CM;
+//	CM.key = "ABCDABCDABCDABCDABCDABCDABCD";
+//	std::ofstream output;
+//	output.open("ciphertext.txt");
+//	std::ifstream input;
+//	input.open("plaintext.txt");
+//	CM.encodeDecode(input, output);
+//	output.close();
+//	input.close();
+//	input.open("ciphertext.txt");
+//	output.open("newplaintext.txt");
+//	CM.encodeDecode(input, output);
+//	system("pause");
+//}
+
+TEST_CASE("TESTVE", "")
 {
-	cmdline_parser parser;
+	INFO("Test Vignere encoding");
+	CryptoMachinePolicies<Vigenere, ECB, Pack, GroupingNo> CM;
+	CM.key = "ABCDABCDABCDABCDABCDABCDABCD";
+	std::ofstream output;
+	output.open("ciphertext.txt");
+	std::ifstream input;
+	input.open("plaintext.txt");
+	CM.encode(input, output);
+	output.close();
+	input.close();
+	output.open("newplaintext.txt");
+	input.open("ciphertext.txt");
+	CM.decode(input, output);
+	output.close();
+	input.close();
+	input.open("ciphertext.txt");
+	std::string cipherText;
+	std::getline(input, cipherText);
+	REQUIRE(cipherText == "CSASTPKVSIQUTGQUCSASTPIUAQJB");
+};
 
-	/*if (!parser.process_cmdline(argc, argv))
-	{
-		std::cerr << "Couldn't process command line arguments" << std::endl;
-		return 1;
-	}
+TEST_CASE("TESTVD", "")
+{
+	INFO("Test Vignere decoding");
+	CryptoMachinePolicies<Vigenere, ECB, Pack, GroupingNo> CM;
+	CM.key = "ABCDABCDABCDABCDABCDABCDABCD";
+	std::ofstream output;
+	output.open("ciphertext.txt");
+	std::ifstream input;
+	input.open("plaintext.txt");
+	CM.encode(input, output);
+	output.close();
+	input.close();
+	output.open("newplaintext.txt");
+	input.open("ciphertext.txt");
+	CM.decode(input, output);
+	output.close();
+	input.close();
+	input.open("newplaintext.txt");
+	std::string plainText;
+	std::getline(input, plainText);
+	REQUIRE(plainText == "CRYPTOISSHORTFORCRYPTOGRAPHY");
+};
 
-	if (parser.should_print_help())
-		parser.print_help(std::cout);*/
 
-	CryptoMachinePolicies<Vigenere, ECB, Pack, GroupingYes> rawr;
-	rawr.key = "ABCDABCDABCDABCDABCDABCDABCD";
-	rawr.encode(std::cin, std::cout);
-	rawr.decode(std::cin, std::cout);
-	mySleep(30);
+TEST_CASE("TESTG", "")
+{
+	INFO("Test grouping");
+	GroupingYes gr;
+	std::string x = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	gr.group(x);
+	REQUIRE(x == "ABCDE FGHIJ KLMNO PQRST UVWXY Z");
+};
+
+TEST_CASE("TESTX", "")
+{
+	INFO("Test XOR encoding");
+	CryptoMachinePolicies<XOR, ECB, Pack, GroupingNo> CM;
+	CM.key = "ABCDABCDABCDABCDABCDABCDABCD";
+	std::ofstream output;
+	output.open("ciphertext.txt");
+	std::ifstream input;
+	input.open("plaintext.txt");
+	CM.encodeDecode(input, output);
+	output.close();
+	input.close();
+	input.open("ciphertext.txt");
+	std::string cipherText;
+	std::getline(input, cipherText);
+	REQUIRE(cipherText == "CSASTPKVSIQUTGQUCSASTPIUAQJB");
 }
-
-/*TEST_CASE("TESTV", "")
-{
-	INFO("Test Vignere encoad");
-	//Vignere vi;
-	//vi.setKey("LEMON");
-	CryptoMachinePolicies<Vigenere, ECB, Pack, GroupingYes> CM;
-	std::string outputFileName = "ciphertext.txt";
-	std::string inputFileName = "plaintext.txt";
-	CM.encode(inputFileName, outputFileName);
-	std::ifstream in("ciphertext.txt");
-	std::string line;
-	std::getline(in, line);
-	REQUIRE(line == "LXFOPVEFRNHR,OGEEOYNEHMKA");
-}*/
-

@@ -1,6 +1,6 @@
 CC=g++
-CLASSES = Assignment3.o 
-TARGET = Assignment3
+CLASSES = CryptoMachine.o 
+TARGET = CryptoMachine
 
 $(TARGET): $(CLASSES)
 	$(CC) $(CLASSES) -o $(TARGET)
