@@ -11,21 +11,34 @@ int main(int argc, char* argv[])
 {
 	cmdline_parser parser;
 
-	if (!parser.process_cmdline(argc, argv))
+	/*if (!parser.process_cmdline(argc, argv))
 	{
 		std::cerr << "Couldn't process command line arguments" << std::endl;
 		return 1;
 	}
 
 	if (parser.should_print_help())
-		parser.print_help(std::cout);
+		parser.print_help(std::cout);*/
 
-	std::string test = "Beware the Jabberwock, my son! The jaws that bite, the claws that catch!";
-	CryptoMachinePolicies<XOR, ECB, Pack, GroupingNo> rawr;
-	std::cout << test << std::endl;
-	rawr.encode(test, "VIGENERECIPHER");
-	rawr.decode(test, "VIGENERECIPHER");
-	std::cout << test << std::endl;
+	CryptoMachinePolicies<Vigenere, ECB, Pack, GroupingYes> rawr;
+	rawr.key = "ABCDABCDABCDABCDABCDABCDABCD";
+	rawr.encode(std::cin, std::cout);
+	rawr.decode(std::cin, std::cout);
 	mySleep(30);
 }
+
+/*TEST_CASE("TESTV", "")
+{
+	INFO("Test Vignere encoad");
+	//Vignere vi;
+	//vi.setKey("LEMON");
+	CryptoMachinePolicies<Vigenere, ECB, Pack, GroupingYes> CM;
+	std::string outputFileName = "ciphertext.txt";
+	std::string inputFileName = "plaintext.txt";
+	CM.encode(inputFileName, outputFileName);
+	std::ifstream in("ciphertext.txt");
+	std::string line;
+	std::getline(in, line);
+	REQUIRE(line == "LXFOPVEFRNHR,OGEEOYNEHMKA");
+}*/
 
