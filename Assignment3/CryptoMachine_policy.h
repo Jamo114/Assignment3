@@ -38,7 +38,7 @@ public:
 		x = out;
 		std::cout << x << std::endl;
 
-		Grouping go;
+		GroupingYes go;
 		go.group(x);
 	}
 
@@ -46,9 +46,6 @@ public:
 	{
 		//Transform all to upper case and removes spaces
 		std::transform(x.begin(), x.end(), x.begin(), ::toupper);
-		x.erase(
-			std::remove_if(x.begin(), x.end(), ::isspace),
-			x.end());
 
 		std::string out;
 		std::cout << x << std::endl;
@@ -67,7 +64,7 @@ public:
 		x = out;
 		std::cout << x << std::endl;
 
-		Grouping go;
+		GroupingYes go;
 		go.group(x);
 	}
 };
@@ -80,9 +77,6 @@ public:
 	{
 		//Transform all to upper case and removes spaces
 		std::transform(x.begin(), x.end(), x.begin(), ::toupper);
-		x.erase(
-			std::remove_if(x.begin(), x.end(), ::isspace),
-			x.end());
 
 		std::string out;
 		std::cout << x << std::endl;
@@ -129,4 +123,75 @@ public:
 	}
 };
 
+template<typename Pack>
+class CryptoMachinePolicies<XOR, ECB, Pack, GroupingYes>
+{
+public:
+	void encode(std::string &x, std::string key)
+	{
+		//Transform all to upper case and removes spaces
+		std::transform(x.begin(), x.end(), x.begin(), ::toupper);
+		std::string out;
+		for (int i = 0, j = 0; i < x.size(); ++i)
+		{
+			out += x[i] ^ key[j];
+			j = (j + 1) % key.length();
+		}
+		GroupingYes go;
+		go.group(out);
+		x = out;
+	}
+
+	void decode(std::string &x, std::string key)
+	{
+		//Transform all to upper case and removes spaces
+		std::transform(x.begin(), x.end(), x.begin(), ::toupper);
+		std::string out;
+		for (int i = 0, j = 0; i < x.size(); ++i)
+		{
+			out += x[i] ^ key[j];
+			j = (j + 1) % key.length();
+		}
+		GroupingYes go;
+		go.group(out);
+		x = out;
+	}
+};
+
+template<typename Pack>
+class CryptoMachinePolicies<XOR, ECB, Pack, GroupingNo>
+{
+public:
+	void encode(std::string &x, std::string key)
+	{
+		//Transform all to upper case and removes spaces
+		std::transform(x.begin(), x.end(), x.begin(), ::toupper);
+		char k = 'X';
+		std::string out;
+		for (int i = 0, j = 0; i < x.size(); ++i)
+		{
+			if (x[i] < 'A' || x[i] > 'Z')
+				continue;
+			out += x[i] ^ k;
+			//j = (j + 1) % key.length();
+		}
+		x = out;
+	}
+
+	void decode(std::string &x, std::string key)
+	{
+		//Transform all to upper case and removes spaces
+		std::transform(x.begin(), x.end(), x.begin(), ::toupper);
+		char k = 'X';
+		std::string out;
+		for (int i = 0, j = 0; i < x.size(); ++i)
+		{
+			if (x[i] < 'A' || x[i] > 'Z')
+				//continue;
+				out += x[i] ^ k;
+			//j = (j + 1) % key.length();
+		}
+		x = out;
+	}
+};
 #endif

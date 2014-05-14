@@ -17,7 +17,7 @@ public:
 	}
 };
 
-class Xor
+class XOR
 {
 public:
 	std::string key;

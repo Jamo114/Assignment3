@@ -9,6 +9,7 @@
 #include "CryptoMachine_traits.h"
 #include "CryptoMachine_policy.h"
 #include "Simple_types.h"
+#include "cmdline_parser.h"
 
 class driver
 {
